@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_death.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modavid <modavid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mounir <mounir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 00:33:05 by modavid           #+#    #+#             */
-/*   Updated: 2024/12/06 00:33:36 by modavid          ###   ########.fr       */
+/*   Updated: 2024/12/11 10:40:12 by mounir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,29 @@ int	check_death(t_table *table)
 		return (1);
 	}
 	pthread_mutex_unlock(&table->dead_mutex);
+	return (0);
+}
+
+long	check_eat_mutex(t_philo *philo)
+{
+	long	i;
+	
+	pthread_mutex_lock(&philo->counter_eat_mutex);
+	i = philo->counter_eat;
+	pthread_mutex_unlock(&philo->counter_eat_mutex);
+	return (i);
+}
+
+int	check_each_eat(t_philo *philo)
+{
+	int	i;
+	
+	i = -1;
+	while (++i < philo->table->philo_number)
+	{
+		if (check_eat_mutex(philo) != philo->table->each_eat)
+			return (1);
+	}
 	return (0);
 }
 
@@ -47,6 +70,8 @@ void	monitor(t_table *table)
 				pthread_mutex_unlock(&table->print);
 				return ;
 			}
+			if (check_each_eat(philo) == 0)
+				return ;	
 			usleep(50);
 		}
 	}

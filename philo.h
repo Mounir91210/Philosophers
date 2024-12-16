@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modavid <modavid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mounir <mounir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:14:50 by modavid           #+#    #+#             */
-/*   Updated: 2024/12/06 00:34:26 by modavid          ###   ########.fr       */
+/*   Updated: 2024/12/11 10:38:33 by mounir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ typedef struct s_philo
 	struct s_table	*table;
 	int				index;
 	long			last_eat;
+	long			counter_eat;
+	pthread_mutex_t	counter_eat_mutex;
 	pthread_mutex_t	fork;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	eat;
 	pthread_t		thread;
-
 }	t_philo;
 
 typedef struct s_table
@@ -46,6 +47,7 @@ typedef struct s_table
 	t_philo			*philo;
 	pthread_mutex_t	print;
 	pthread_mutex_t	dead_mutex;
+	long			each_eat;
 	long			t_to_die;
 	long			philo_number;
 	long			t_to_eat;
@@ -55,7 +57,7 @@ typedef struct s_table
 }	t_table;
 
 long	ft_atoi_long(const char *str);
-int		init_table(t_table *table, char **av);
+int		init_table(t_table *table, char **av, int ac);
 void	*routine(void *param);
 int		mutex_print(t_philo *philo, int flag);
 int		mutex_print2(t_philo *philo, int flag);
@@ -73,5 +75,7 @@ void	hardcode_forone(t_table *table);
 int		ft_isdigit(int c);
 void	monitor(t_table *table);
 int		check_death(t_table *table);
+void	counter_eat_mutex(t_philo *philo);
+int		check_each_eat(t_philo *philo);
 
 #endif

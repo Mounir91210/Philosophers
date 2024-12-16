@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time_and_sleep.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modavid <modavid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mounir <mounir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 00:35:59 by modavid           #+#    #+#             */
-/*   Updated: 2024/12/06 00:36:25 by modavid          ###   ########.fr       */
+/*   Updated: 2024/12/11 10:11:37 by mounir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	ft_usleep(t_philo *philo, int time)
 	while (start > (get_time_in_ms(philo) - time))
 	{
 		if (check_death(philo->table) == 1)
+			return (1);
+		if (check_each_eat(philo) == 0)
 			return (1);
 		usleep(10);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modavid <modavid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mounir <mounir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:20:54 by modavid           #+#    #+#             */
-/*   Updated: 2024/12/06 00:25:57 by modavid          ###   ########.fr       */
+/*   Updated: 2024/12/10 18:07:30 by mounir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ long	check_lasteat_mutex(t_philo *philo)
 	i = philo->last_eat;
 	pthread_mutex_unlock(&philo->eat);
 	return (i);
+}
+
+void	counter_eat_mutex(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->counter_eat_mutex);
+	philo->counter_eat++;
+	pthread_mutex_unlock(&philo->counter_eat_mutex);
 }
 
 void	mutex_destroy(t_table *table)

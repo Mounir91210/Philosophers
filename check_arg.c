@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modavid <modavid@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mounir <mounir@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:23:35 by modavid           #+#    #+#             */
-/*   Updated: 2024/12/06 00:20:06 by modavid          ###   ########.fr       */
+/*   Updated: 2024/12/11 10:42:14 by mounir           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	ft_isnum(char *av)
 
 int	check_arg(t_table *table, char **av)
 {
-	if (ft_isnum(av[1]) == 1 || ft_isnum(av[2]) == 1 || ft_isnum(av[3]) == 1)
+	if (ft_isnum(av[1]) == 1 || ft_isnum(av[2]) == 1 || ft_isnum(av[3]) == 1
+		|| ft_isnum(av[4]) == 1)
 		return (write(2, "Error Parsing\n", 14), 1);
 	if (table->philo_number > 200 || table->philo_number < 1)
 		return (write(2, "Error Parsing\n", 14), 1);

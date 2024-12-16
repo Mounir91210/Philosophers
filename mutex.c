@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mounir <mounir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modavid <modavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:20:54 by modavid           #+#    #+#             */
-/*   Updated: 2024/12/10 18:07:30 by mounir           ###   ########.fr       */
+/*   Updated: 2024/12/16 20:07:47 by modavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,5 @@ void	mutex_destroy(t_table *table)
 	pthread_mutex_destroy(&table->print);
 	pthread_mutex_destroy(&table->dead_mutex);
 	pthread_mutex_destroy(&table->philo->eat);
+	pthread_mutex_destroy(&table->philo->counter_eat_mutex);
 }

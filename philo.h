@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mounir <mounir@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modavid <modavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 15:14:50 by modavid           #+#    #+#             */
-/*   Updated: 2024/12/11 10:38:33 by mounir           ###   ########.fr       */
+/*   Updated: 2024/12/16 20:02:54 by modavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_table
 	t_philo			*philo;
 	pthread_mutex_t	print;
 	pthread_mutex_t	dead_mutex;
+	int				ac;
 	long			each_eat;
 	long			t_to_die;
 	long			philo_number;

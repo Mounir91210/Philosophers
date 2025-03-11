@@ -6,7 +6,7 @@
 /*   By: modavid <modavid@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:17:42 by modavid           #+#    #+#             */
-/*   Updated: 2024/12/16 20:26:43 by modavid          ###   ########.fr       */
+/*   Updated: 2025/03/11 15:26:17 by modavid          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	*routine(void *param)
 	t_philo	*philo;
 
 	philo = (t_philo *)param;
+	if (philo->table->ac == 6 && philo->table->each_eat == philo->counter_eat)
+			return (NULL);
 	if (mutex_print2(philo, THINK) == 1)
 		return (NULL);
 	while (1)
@@ -41,10 +43,12 @@ void	*routine(void *param)
 		pthread_mutex_unlock(&philo->eat);
 		if (mutex_print(philo, EAT) == 1)
 			return (unlock_mutex(philo), NULL);
-		counter_eat_mutex(philo);
 		if (ft_usleep(philo, philo->table->t_to_eat) == 1)
 			return (unlock_mutex(philo), NULL);
+		counter_eat_mutex(philo);
 		unlock_mutex(philo);
+		if (philo->table->ac == 6 && philo->table->each_eat == philo->counter_eat)
+			return (NULL);
 		if (mutex_print(philo, SLEEP) == 1)
 			return (NULL);
 		if (ft_usleep(philo, philo->table->t_to_sleep) == 1
@@ -90,6 +94,9 @@ void	create_pthread(t_table *table)
 	if (pthread_while(table) == 1)
 		return ;
 	monitor(table);
-	while (i < table->philo_number + 1)
-		pthread_join(table->philo[i++].thread, NULL);
+	while (i < table->philo_number)
+	{
+		pthread_join(table->philo[i].thread, NULL);
+		i++;
+	}
 }
